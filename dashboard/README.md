@@ -3,8 +3,6 @@
 ## Introduction
 This is a Dashboard of DOQFY, where a everey particular user can view details of his/her wallet amount, order details and chart respresentaion of E-stamp and E-Sign of various branches.
 
-## Deplolyed App
-https://deployed-site.whatever
 
 ## Video Walkthrough of the project
 
@@ -28,7 +26,8 @@ https://deployed-site.whatever
 
 ## Installation & Getting started
 -> to Locally Run the Project 
-### ng serve
+ # ng serve
+
 This command will build and launch the development server for you locally at http://localhost:4200
 
 -> To get The data from backend(JSON-Server) as data is stored in json file
