@@ -1,27 +1,66 @@
-# DoqfyDashboard
+# Project Title
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.5.
+## Introduction
+This is a Dashboard of DOQFY, where a everey particular user can view details of his/her wallet amount, order details and chart respresentaion of E-stamp and E-Sign of various branches.
 
-## Development server
+## Deplolyed App
+https://deployed-site.whatever
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Video Walkthrough of the project
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Wallet Money is dynamically upadted.
+- Pending issues can be seen, which fetched from backend
+- Theres is display of order details of of various states of India, described as per
+   -> Total order
+   -> In Progress
+   -> Completed
+   -> Cancelled
 
-## Build
+- Theres is also a chart display with a select tag to choose various states of India. 
+  Describing  E-stamps and E-Sign :
+  -> Initiated
+  -> Signed 
+  -> Pending
+  -> Expired
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Installation & Getting started
+-> to Locally Run the Project 
+### ng serve
+This command will build and launch the development server for you locally at http://localhost:4200
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+-> To get The data from backend(JSON-Server) as data is stored in json file
+## json-server --watch src/assets/data.json
 
-## Running end-to-end tests
+```bash
+npm install
+cd my-project
+ng serve
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+Include screenshots as necessary.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## APIs Used
+-> Json Server has been used for backend
+### http://localhost:3000
+
+## API Endpoints
+In case of Backend Applications provide a list of your API endpoints, methods, brief descriptions, and examples of request/response.
+GET http://localhost:3000/users - retrieve all users
+GET http://localhost:3000/orders - retrieve all Orders
+GET http://localhost:3000/pending - retrieve all Pending Orders
+GET http://localhost:3000/esign - retrieve all Pending E-Sign
+GET http://localhost:3000/estamp - retrieve all E-Stamps
+
+
+## Technology Stack
+List and provide a brief overview of the technologies used in the project.
+
+- Angular 16
+- CSS
+- Google Fonts for Icons and Fonts
+- Chart.js -> ng Chart2
+- Anugular Material Ui
