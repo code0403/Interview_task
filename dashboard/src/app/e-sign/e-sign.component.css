@@ -1,0 +1,80 @@
+
+.filter{
+    width:1000px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter_left {
+  width:250px;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.filter_left select{
+    width:250px;
+    height: 30px;
+    outline: none;
+    border-radius: 5px;
+}
+
+.filter_right {
+    width:350px;
+    height: 30px;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+}
+
+.filter_right select{
+    width:150px;
+    height: 30px;
+    outline: none;
+    border-radius:10px;
+}
+
+.filter_right input{
+    width:150px;
+    height: 30px;
+    outline: none;
+    border-radius:10px;
+}
+
+
+
+
+
+.e_sign{
+    width:1000px;
+    height:400px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 350px;
+    gap: 25px;
+}
+
+.e_sign div{
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.sgin,.count {
+    text-align: center; 
+  }
+  
+  .sgin h2 {
+    margin-bottom: 15px; 
+  }
+
+  .count h2{
+    margin-bottom: 15px;
+  }
+
+.chart-container{
+    position: relative;
+    height: 10vh;
+    width: 20vw;
+    margin: auto;
+}

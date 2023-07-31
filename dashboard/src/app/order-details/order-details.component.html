@@ -1,0 +1,50 @@
+   <!-- Filter Section -->
+   <div class="filter">
+    <div class="filter_left">
+      <select [(ngModel)]="selectedOption" (change) = "onStateChange()">
+        <option value="">All Branches</option>
+        <option *ngFor="let state of states" [value]="state">{{ state }}</option>
+      </select>
+    </div>
+
+    <div class="filter_right">
+      <select>
+        <option value="">Custom Range</option>
+      </select>
+
+      <input type="date" />
+    </div>
+  </div>
+
+<!-- Orders -->
+<div class="order">
+    
+    <div class="order_heading">      
+      <h2>Order Details</h2>
+      <p>View All</p>
+    </div>
+
+    <div class="order_details_continer">
+      <div>
+        <p class="order_details_heading">{{data.length}} <span class="material-symbols-outlined">box</span></p>
+        <p>Total orders</p>
+        <p><span class="material-symbols-outlined trending_up">trending_up</span> <span>+2.4%</span> </p>
+      </div>
+      <div>
+        <p class="order_details_heading">{{inProgress.length}} <span class="material-symbols-outlined">schedule</span></p>
+        <p>In Progress</p>
+        <p><span class="material-symbols-outlined trending_up">trending_up</span> <span>+2.4%</span> </p>
+      </div>
+      <div>
+        <p class="order_details_heading">{{completed.length}} <span class="material-symbols-outlined">box</span></p>
+        <p>Completetd Orders</p>
+        <p><span class="material-symbols-outlined trending_up">trending_up</span> <span>+2.4%</span> </p>
+      </div>
+      <div>
+        <p class="order_details_heading">{{cancelled.length}} <span class="material-symbols-outlined">cancel</span></p>
+        <p>Cancelled Orders</p>
+        <p><span class="material-symbols-outlined trending_up">trending_up</span> <span>+2.4%</span> </p>
+      </div>
+    </div>
+
+</div>
