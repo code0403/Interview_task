@@ -11,6 +11,8 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import { ESignComponent } from './e-sign/e-sign.component';
 import { NgChartsModule } from 'ng2-charts';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms'; // Import FormsModule
+import { StateService } from './state/state.service';
 
 @NgModule({
   declarations: [
@@ -26,9 +28,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     NgChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [StateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

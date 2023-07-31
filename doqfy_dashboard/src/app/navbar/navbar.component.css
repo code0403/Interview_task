@@ -42,10 +42,14 @@ nav{
     text-decoration: none;
 }
 
+.notification{
+    display: flex;
+}
+
 .notifiy{
     position: absolute;
-    top:1.5vh;
-    left: 165vh;
+    top:1.8vh;
+    left: 83vw;
     display: flex;
     justify-content: center;
     align-items: center;

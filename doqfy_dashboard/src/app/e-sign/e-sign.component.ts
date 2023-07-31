@@ -88,6 +88,7 @@
 
 import { Component } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-e-sign',
@@ -96,6 +97,11 @@ import { ChartConfiguration } from 'chart.js';
 })
 export class ESignComponent {
   title = 'doqfy doghnut';
+
+  states: string[] = ['Karnataka', 'Maharashtra', 'Tamil Nadu', 'Goa'];
+  selectedOption: string = '';
+  public data: any[] = [];
+  selectedState: string = '';
 
       // Doughnut
       public doughnutChartLabels: string[] = [ 'Initiated', 'Pending', 'Signed', 'Expired' ];
@@ -109,7 +115,26 @@ export class ESignComponent {
         cutout:95,
       };
     
-      constructor() {
-  
+      constructor(private http: HttpClient) {}
+
+      getData() {
+        this.http.get<any[]>(`http://localhost:3000/orders`).subscribe((res) => {
+          this.data = res;
+          console.log(this.data);
+        } 
+        )}
+        
+      
+
+      onStateChange() {
+        if (this.selectedOption == '') {
+          this.selectedState = '';
+          this.getData();
+        } else {
+          this.selectedState = '';
+          this.selectedState = this.selectedOption;
+          console.log(this.selectedState);
+          this.getData()
+        }
       }
 }
