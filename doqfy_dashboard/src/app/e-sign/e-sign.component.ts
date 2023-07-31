@@ -1,94 +1,15 @@
-// import { Component } from '@angular/core';
-// import { ChartConfiguration } from 'chart.js';
-// import { HttpClient } from '@angular/common/http';
-
-// @Component({
-//   selector: 'app-e-sign',
-//   templateUrl: './e-sign.component.html',
-//   styleUrls: ['./e-sign.component.css']
-// })
-// export class ESignComponent {
-//   title = 'doqfy doughnut';
-//   public doughnutChartLabels: string[] = ['Initiated', 'Pending', 'Signed', 'Expired'];
-//   public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] = [];
-
-//   public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
-//     responsive: false,
-//     radius: 100,
-//     cutout: 95,
-//   };
-
-//   public states: string[] = []; // Store the list of states from the JSON data
-//   public selectedState: string | undefined; // Store the selected state
-//   public data: any[] = []; // Store the fetched JSON data
-
-//   constructor(private http: HttpClient) {
-//     // Fetch the JSON data on component initialization
-//     this.getData();
-//   }
-
-//   getData() {
-//     // Replace the URL with the correct path to your JSON data
-//     this.http.get<any[]>('http://localhost:3000/esign').subscribe((data) => {
-//       // Extract the list of states from the JSON data
-//       this.states = data.map((item) => item.state);
-
-//       // Set the initial datasets to the first state's data
-//       this.setDatasets(this.states[0]);
-//     });
-//   }
-
-//   // Method to update the datasets based on the selected state
-//   updateChart() {
-//     if (this.selectedState) {
-//       this.setDatasets(this.selectedState);
-//     }
-//   }
-  
-
-//   // Helper method to update the datasets
-//   private setDatasets(state: string) {
-//     const selectedStateData = this.data.find((item) => item.state === state);
-//     if (selectedStateData) {
-//       this.doughnutChartDatasets = [
-//         {
-//           data: [
-//             selectedStateData.initiated,
-//             selectedStateData.pending,
-//             selectedStateData.Signed,
-//             selectedStateData.expired,
-//           ],
-//           label: state,
-//           backgroundColor: ['blue', 'skyblue', 'violet', 'cadet blue'],
-//         },
-//       ];
-//     }
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { Component } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+interface ESignData {
+  state: string;
+  initiated: number;
+  pending: number;
+  Signed: number;
+  expired: number;
+}
 
 @Component({
   selector: 'app-e-sign',
@@ -98,43 +19,197 @@ import { HttpClient } from '@angular/common/http';
 export class ESignComponent {
   title = 'doqfy doghnut';
 
-  states: string[] = ['Karnataka', 'Maharashtra', 'Tamil Nadu', 'Goa'];
+  public states: string[] = ['Karnataka', 'Maharashtra', 'Tamil Nadu', 'Goa'];
   selectedOption: string = '';
-  public data: any[] = [];
-  selectedState: string = '';
+  public data: ESignData[] = [];
+  public selectedState: string | undefined = '';
 
-      // Doughnut
-      public doughnutChartLabels: string[] = [ 'Initiated', 'Pending', 'Signed', 'Expired' ];
-      public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] = [
-          { data: [ 350, 450, 100, 50 ], label: 'Series A' , backgroundColor: ['blue', 'skyblue', 'violet', 'cadet blue'],},
-        ];
-    
-      public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
-        responsive: false,
-        radius:100,
-        cutout:95,
-      };
-    
-      constructor(private http: HttpClient) {}
+  // Doughnut
+  public doughnutChartLabels: string[] = ['Initiated', 'Pending', 'Signed', 'Expired'];
+  public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] = [
+    { data: [350, 450, 100, 50], label: 'Initial Data', backgroundColor: ['#654E92', '#6C9BCF', '#4E4FEB', '#3B5249'] },
+  ];
 
-      getData() {
-        this.http.get<any[]>(`http://localhost:3000/orders`).subscribe((res) => {
-          this.data = res;
-          console.log(this.data);
-        } 
-        )}
-        
-      
+  public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
+    responsive: false,
+    radius: 100,
+    cutout: 75,
+  };
 
-      onStateChange() {
-        if (this.selectedOption == '') {
-          this.selectedState = '';
-          this.getData();
-        } else {
-          this.selectedState = '';
-          this.selectedState = this.selectedOption;
-          console.log(this.selectedState);
-          this.getData()
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {
+    this.getData();
+  }
+
+  getData() {
+    this.http.get<ESignData[]>(`http://localhost:3000/esign`).subscribe((res) => {
+      this.data = res;
+
+      if (this.selectedOption === '') {
+        // If no state is selected, show data for all states
+        this.setDatasets(this.data);
+        this.showSnackbar('You selected All States.');
+      } else {
+        // If a specific state is selected, filter the data for that state
+        const selectedData = this.data.find((item) => item.state === this.selectedOption);
+        if (selectedData) {
+          this.setDatasets([selectedData]);
+          this.showSnackbar(`You selected ${this.selectedOption}.`);
         }
       }
+    });
+  }
+
+  onStateChange() {
+    if (this.selectedOption === '') {
+      this.selectedState = '';
+    } else {
+      this.selectedState = this.selectedOption;
+    }
+
+    this.getData();
+  }
+
+  private setDatasets(updatedData: ESignData[]) {
+    console.log(updatedData[0]);
+    if (updatedData.length > 0) {
+      this.doughnutChartDatasets = [
+        {
+          data: [
+            updatedData[0].initiated,
+            updatedData[0].pending,
+            updatedData[0].Signed,
+            updatedData[0].expired,
+          ],
+          label: updatedData[0].state,
+          backgroundColor: ['#654E92', '#6C9BCF', '#4E4FEB', '#3B5249'],
+        },
+      ];
+    }
+  }
+
+  private showSnackbar(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+    });
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { Component } from '@angular/core';
+// import { ChartConfiguration } from 'chart.js';
+// import { HttpClient } from '@angular/common/http';
+// import { MatSnackBar } from '@angular/material/snack-bar';
+
+
+// @Component({
+//   selector: 'app-e-sign',
+//   templateUrl: './e-sign.component.html',
+//   styleUrls: ['./e-sign.component.css']
+// })
+// export class ESignComponent {
+//   title = 'doqfy doghnut';
+
+//   public states: string[] = ['Karnataka', 'Maharashtra', 'Tamil Nadu', 'Goa'];
+//   selectedOption: string = '';
+//   public data: any[] = [];
+//   public selectedState: string | undefined = '';
+
+//       // Doughnut
+//       public doughnutChartLabels: string[] = [ 'Initiated', 'Pending', 'Signed', 'Expired' ];
+//       public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] = [
+//           { data: [ 350, 450, 100, 50 ], label: 'Inital Data' , backgroundColor: ['#654E92', '#6C9BCF', '#4E4FEB', '#3B5249'],},
+//         ];
+    
+//       public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
+//         responsive: false,
+//         radius:100,
+//         cutout:75,
+//       };
+
+    
+//       constructor(private http: HttpClient, private snackBar: MatSnackBar) {
+//         this.getData()
+//       }
+
+//       getData() {
+//         this.http.get<any[]>(`http://localhost:3000/esign`).subscribe((res) => {
+          
+
+//           if(this.selectedState == ""){
+//             this.data = res;
+//             console.log(this.data);
+//             this.setDatasets(this.data)
+//           } else {
+//              this.data = this.data.filter((el) => {
+//                if(el.state === this.selectedState){
+//                 return el;
+//                }
+//              })
+//              this.setDatasets(this.data)
+//           }
+//         } 
+//       )}
+        
+//       onStateChange() {
+//         if (this.selectedOption == '') {
+//           this.selectedState = '';
+//           this.showSnackbar('You selected All States.');
+//           this.getData();
+//         } else {
+//           this.selectedState = '';
+//           this.selectedState = this.selectedOption;
+//           console.log(this.selectedState);
+//           this.showSnackbar(`You selected ${this.selectedState}.`);
+//           this.getData()
+//         }
+//       }
+ 
+
+//   private setDatasets(updatedData: any[]) {
+//     console.log(updatedData[0])
+//     if (updatedData) {
+//       this.doughnutChartDatasets = [
+//         {
+//           data: [
+//             updatedData[0].initiated,
+//             updatedData[0].pending,
+//             updatedData[0].Signed,
+//             updatedData[0].expired,
+//           ],
+//           label: updatedData[0].state,
+//           backgroundColor: ['#654E92', '#6C9BCF', '#4E4FEB', '#3B5249'],
+//         },
+//       ];
+//     }
+//   }
+
+//   private showSnackbar(message: string) {
+//     this.snackBar.open(message, 'Close', {
+//       duration: 3000,
+//       verticalPosition: 'top',
+//       horizontalPosition: 'right',
+//     });
+//   }
+// }
+

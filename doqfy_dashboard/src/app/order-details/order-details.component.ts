@@ -30,8 +30,8 @@ export class OrderDetailsComponent {
   getData() {
     this.http.get<any[]>(`http://localhost:3000/orders `).subscribe((res) => {
       this.data = res;
-      console.log(this.data);
-      console.log(this.selectedState);
+      //console.log(this.data);
+     // console.log(this.selectedState);
 
       if (this.selectedState == '') {
         //show all orders

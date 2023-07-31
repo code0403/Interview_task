@@ -11,8 +11,10 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import { ESignComponent } from './e-sign/e-sign.component';
 import { NgChartsModule } from 'ng2-charts';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'; // Import FormsModule
+import { FormsModule } from '@angular/forms'; 
 import { StateService } from './state/state.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { StateService } from './state/state.service';
     AppRoutingModule,
     NgChartsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
   ],
   providers: [StateService],
   bootstrap: [AppComponent]

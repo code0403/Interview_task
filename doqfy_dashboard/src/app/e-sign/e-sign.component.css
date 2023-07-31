@@ -1,45 +1,45 @@
 
 .filter{
-  width:1000px;
-  height: 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    width:1000px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .filter_left {
-width:250px;
-height: 30px;
-margin-left: 10px;
+  width:250px;
+  height: 30px;
+  margin-left: 10px;
 }
 
 .filter_left select{
-  width:250px;
-  height: 30px;
-  outline: none;
-  border-radius: 5px;
+    width:250px;
+    height: 30px;
+    outline: none;
+    border-radius: 5px;
 }
 
 .filter_right {
-  width:350px;
-  height: 30px;
-  display: flex;
-  justify-content:space-around;
-  align-items: center;
+    width:350px;
+    height: 30px;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
 }
 
 .filter_right select{
-  width:150px;
-  height: 30px;
-  outline: none;
-  border-radius:10px;
+    width:150px;
+    height: 30px;
+    outline: none;
+    border-radius:10px;
 }
 
 .filter_right input{
-  width:150px;
-  height: 30px;
-  outline: none;
-  border-radius:10px;
+    width:150px;
+    height: 30px;
+    outline: none;
+    border-radius:10px;
 }
 
 
@@ -51,7 +51,7 @@ margin-left: 10px;
     height:400px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 400px;
+    grid-template-rows: 350px;
     gap: 25px;
 }
 
@@ -65,16 +65,12 @@ margin-left: 10px;
   }
   
   .sgin h2 {
-    margin-bottom: 10px; 
+    margin-bottom: 15px; 
   }
 
-  .chartWrapper{
-    border:1px solid red;
-    width:100%;
-    height: 80%;
-    display: flex;
-    justify-content: space-between;
-}
+  .count h2{
+    margin-bottom: 15px;
+  }
 
 .chart-container{
     position: relative;
