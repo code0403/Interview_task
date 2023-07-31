@@ -27,7 +27,7 @@ https://drive.google.com/file/d/1OQcm_pZU055Ey2iFhguM7-9uUE3kZBCO/view?usp=shari
 
 ## Installation & Getting started
 -> to Locally Run the Project 
- # ng serve
+ *** ng serve ***
 
 This command will build and launch the development server for you locally at http://localhost:4200
 
