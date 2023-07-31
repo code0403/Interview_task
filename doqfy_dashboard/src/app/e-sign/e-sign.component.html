@@ -1,7 +1,7 @@
- <!-- Filter Section -->
- <div class="filter">
+<!-- Filter Section -->
+<div class="filter">
   <div class="filter_left">
-    <select [(ngModel)]="selectedOption" (change) = "onStateChange()">
+    <select [(ngModel)]="selectedOption" (change)="onStateChange()">
       <option value="">All Branches</option>
       <option *ngFor="let state of states" [value]="state">{{ state }}</option>
     </select>
@@ -16,33 +16,34 @@
   </div>
 </div>
 
-
 <!-- Charts -->
 <div class="e_sign">
-    <div class="sgin">
-      <h2>E-sign Count</h2>
-      <div class="chart-container">
-        <canvas 
+  <div class="sgin">
+    <h2>E-sign Count</h2>
+    <div class="chart-container">
+      <canvas
         baseChart
         [labels]="doughnutChartLabels"
         [datasets]="doughnutChartDatasets"
         [options]="doughnutChartOptions"
         [legend]="true"
-        [type]="'doughnut'">
-        </canvas>
-      </div>
-    </div>
-    <div class="count">
-      <h2>E-stamp Count</h2>
-      <div class="chart-container">
-        <canvas 
-        baseChart
-        [labels]="doughnutChartLabels"
-        [datasets]="doughnutChartDatasets"
-        [options]="doughnutChartOptions"
-        [legend]="true"
-        [type]="'doughnut'">
-        </canvas>
-      </div>
+        [type]="'doughnut'"
+      >
+      </canvas>
     </div>
   </div>
+  <div class="count">
+    <h2>E-stamp Count</h2>
+    <div class="chart-container">
+      <canvas
+        baseChart
+        [labels]="doughnutChartLabels"
+        [datasets]="doughnutChartDatasets"
+        [options]="doughnutChartOptions"
+        [legend]="true"
+        [type]="'doughnut'"
+      >
+      </canvas>
+    </div>
+  </div>
+</div>

@@ -14,7 +14,7 @@ interface ESignData {
 @Component({
   selector: 'app-e-sign',
   templateUrl: './e-sign.component.html',
-  styleUrls: ['./e-sign.component.css']
+  styleUrls: ['./e-sign.component.css'],
 })
 export class ESignComponent {
   title = 'doqfy doghnut';
@@ -25,10 +25,20 @@ export class ESignComponent {
   public selectedState: string | undefined = '';
 
   // Doughnut
-  public doughnutChartLabels: string[] = ['Initiated', 'Pending', 'Signed', 'Expired'];
-  public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] = [
-    { data: [350, 450, 100, 50], label: 'Initial Data', backgroundColor: ['#654E92', '#6C9BCF', '#4E4FEB', '#3B5249'] },
+  public doughnutChartLabels: string[] = [
+    'Initiated',
+    'Pending',
+    'Signed',
+    'Expired',
   ];
+  public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] =
+    [
+      {
+        data: [350, 450, 100, 50],
+        label: 'Initial Data',
+        backgroundColor: ['#654E92', '#6C9BCF', '#4E4FEB', '#3B5249'],
+      },
+    ];
 
   public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
     responsive: false,
@@ -41,29 +51,35 @@ export class ESignComponent {
   }
 
   getData() {
-    this.http.get<ESignData[]>(`http://localhost:3000/esign`).subscribe((res) => {
-      this.data = res;
+    this.http
+      .get<ESignData[]>(`http://localhost:3000/esign`)
+      .subscribe((res) => {
+        this.data = res;
 
-      if (this.selectedOption === '') {
-        // If no state is selected, show data for all states
-        this.setDatasets(this.data);
-        this.showSnackbar('You selected All States.');
-      } else {
-        // If a specific state is selected, filter the data for that state
-        const selectedData = this.data.find((item) => item.state === this.selectedOption);
-        if (selectedData) {
-          this.setDatasets([selectedData]);
-          this.showSnackbar(`You selected ${this.selectedOption}.`);
+        if (this.selectedOption === '') {
+          // If no state is selected, show data for all states
+          this.setDatasets(this.data);
+          this.snackbar('You selected All States.');
+        } else {
+          // If a specific state is selected, filter the data for that state
+          const selectedData = this.data.find(
+            (item) => item.state === this.selectedOption
+          );
+          if (selectedData) {
+            this.setDatasets([selectedData]);
+            this.snackbar(`You selected ${this.selectedOption}.`);
+          }
         }
-      }
-    });
+      });
   }
 
   onStateChange() {
     if (this.selectedOption === '') {
       this.selectedState = '';
+      this.snackbar('You selected All States.');
     } else {
       this.selectedState = this.selectedOption;
+      this.snackbar(`You selected ${this.selectedOption}.`);
     }
 
     this.getData();
@@ -87,7 +103,7 @@ export class ESignComponent {
     }
   }
 
-  private showSnackbar(message: string) {
+  private snackbar(message: string) {
     this.snackBar.open(message, 'Close', {
       duration: 3000,
       verticalPosition: 'top',
@@ -96,31 +112,10 @@ export class ESignComponent {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import { Component } from '@angular/core';
 // import { ChartConfiguration } from 'chart.js';
 // import { HttpClient } from '@angular/common/http';
 // import { MatSnackBar } from '@angular/material/snack-bar';
-
 
 // @Component({
 //   selector: 'app-e-sign',
@@ -140,21 +135,19 @@ export class ESignComponent {
 //       public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] = [
 //           { data: [ 350, 450, 100, 50 ], label: 'Inital Data' , backgroundColor: ['#654E92', '#6C9BCF', '#4E4FEB', '#3B5249'],},
 //         ];
-    
+
 //       public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
 //         responsive: false,
 //         radius:100,
 //         cutout:75,
 //       };
 
-    
 //       constructor(private http: HttpClient, private snackBar: MatSnackBar) {
 //         this.getData()
 //       }
 
 //       getData() {
 //         this.http.get<any[]>(`http://localhost:3000/esign`).subscribe((res) => {
-          
 
 //           if(this.selectedState == ""){
 //             this.data = res;
@@ -168,9 +161,9 @@ export class ESignComponent {
 //              })
 //              this.setDatasets(this.data)
 //           }
-//         } 
+//         }
 //       )}
-        
+
 //       onStateChange() {
 //         if (this.selectedOption == '') {
 //           this.selectedState = '';
@@ -184,7 +177,6 @@ export class ESignComponent {
 //           this.getData()
 //         }
 //       }
- 
 
 //   private setDatasets(updatedData: any[]) {
 //     console.log(updatedData[0])
@@ -212,4 +204,3 @@ export class ESignComponent {
 //     });
 //   }
 // }
-

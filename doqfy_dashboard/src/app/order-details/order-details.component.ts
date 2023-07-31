@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { StateService } from '../state/state.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-order-details',
@@ -20,7 +21,11 @@ export class OrderDetailsComponent {
   states: string[] = ['Karnataka', 'Maharashtra', 'Tamil Nadu', 'Goa'];
   selectedOption: string = '';
 
-  constructor(private http: HttpClient, private stateService: StateService) {}
+  constructor(
+    private http: HttpClient,
+    private stateService: StateService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.getData();
@@ -30,12 +35,12 @@ export class OrderDetailsComponent {
   getData() {
     this.http.get<any[]>(`http://localhost:3000/orders `).subscribe((res) => {
       this.data = res;
-      //console.log(this.data);
-     // console.log(this.selectedState);
 
       if (this.selectedState == '') {
         //show all orders
         this.data = res;
+
+        this.snackbar('You selected All States.');
 
         this.completed = this.data.filter((el) => {
           if (el.status === 'Completed') {
@@ -55,11 +60,12 @@ export class OrderDetailsComponent {
           }
         });
       } else {
+        this.snackbar(`You selected ${this.selectedOption}.`);
+
         this.data = this.data.filter((el) => {
-          if(el.state_name === this.selectedState){
-            return el
+          if (el.state_name === this.selectedState) {
+            return el;
           }
-          
         });
 
         this.completed = this.data.filter((el) => {
@@ -86,12 +92,21 @@ export class OrderDetailsComponent {
   onStateChange() {
     if (this.selectedOption == '') {
       this.selectedState = '';
+      this.snackbar('You selected All States.');
       this.getData();
     } else {
       this.selectedState = '';
       this.selectedState = this.selectedOption;
-      console.log(this.selectedState);
-      this.getData()
+      this.snackbar(`You selected ${this.selectedOption}.`);
+      this.getData();
     }
+  }
+
+  private snackbar(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+    });
   }
 }
