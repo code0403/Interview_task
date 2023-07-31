@@ -1,0 +1,50 @@
+.frequent{
+    width:1000px;
+    height: 300px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+h2{
+    padding: 20px;
+}
+
+.frequent_contents{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width:100%;
+    height: 55%;
+}
+
+.frequent_items{
+   width:31%;
+   height: 100%;
+   border:2px solid gray;
+   border-radius: 5px;
+   line-height:18px;
+} 
+
+.frequent_items_heading{
+    font-size:1rem;
+    font-weight: 600;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.frequent_items_details{
+    font-size:0.8rem;
+    font-weight: 300;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.frequent_items_link{
+    font-size:1rem;
+    font-weight: 300;
+    margin-left: 10px;
+}
+
+.frequent_items_link:hover{
+    color:#4CAF50!important ;
+}

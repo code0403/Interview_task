@@ -1,0 +1,31 @@
+<div class="sidebar">
+    <div class="greetings" *ngIf="userInfo">
+        <p class="greet">
+            <span class="material-symbols-outlined">waving_hand </span>
+            <span class="message">Welcome Back, </span> 
+            <span class="name" *ngFor = "let name of userInfo">{{name.firstname}}</span> 
+        </p>
+        <p class="date">{{myDate | date:'yyyy-MM-dd'}}, <span>{{day}}</span> </p>
+    </div>
+
+    <div class="wallet-container">
+        <!-- Wallet -->
+        <p class="wallet-heading">Wallet Balance <span class="material-symbols-outlined">account_balance_wallet</span></p>
+        <p class="wallet-amount" *ngIf="userInfo">₹ <span *ngFor="let user of userInfo">{{user['walletBalance']}}</span> </p>
+        <p>Current Balance</p>
+        <p class="add-amount">Running low? <a href="">Click here</a> to add more </p>
+    </div>
+
+
+    <div class="pending-container">
+        <p class="pending-heading">Pending Actions <span class="material-symbols-outlined">pending_actions</span> </p>
+        <!-- Pending Transactions-->
+        <div class="pending-actions" *ngIf="data">
+           <div *ngFor="let order of data">
+            <p class="orderid">{{ order.orderId }} <span>{{ order.orderDate }}</span> </p>
+            <p class="ordermessage">{{order.ordermessage}}</p>
+           </div>
+        </div>
+    </div>
+</div>
+

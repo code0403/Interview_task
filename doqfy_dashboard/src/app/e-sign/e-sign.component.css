@@ -1,0 +1,36 @@
+.e_sign{
+    width:1000px;
+    height:400px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 400px;
+    gap: 25px;
+}
+
+.e_sign div{
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.sgin,.count {
+    text-align: center; 
+  }
+  
+  .sgin h2 {
+    margin-bottom: 10px; 
+  }
+
+  .chartWrapper{
+    border:1px solid red;
+    width:100%;
+    height: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chart-container{
+    position: relative;
+    height: 10vh;
+    width: 20vw;
+    margin: auto;
+}
